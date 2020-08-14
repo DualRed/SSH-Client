@@ -20,15 +20,20 @@ namespace SSHConsole
 
                 //Start the connection
                 client.Connect();
-                Console.Write("Write command here: ");
-                String command = Console.ReadLine();
-                Console.WriteLine("-------------------");
-                Console.WriteLine("Result: ");
-                Console.WriteLine("-------------------");
-                SshCommand output = client.RunCommand(command);
+                while (true)
+                {
+                    Console.Write("Write command here: ");
+                    String command = Console.ReadLine();
+                    if (command == "exit")
+                        break;
+                    Console.WriteLine("-------------------");
+                    Console.WriteLine("Result: ");
+                    Console.WriteLine("-------------------");
+                    SshCommand output = client.RunCommand(command);
+                    string answer = output.Result;
+                    Console.WriteLine(answer);
+                }
                 client.Disconnect();
-                string answer = output.Result;
-                Console.WriteLine(answer);
             }
         }
     }
